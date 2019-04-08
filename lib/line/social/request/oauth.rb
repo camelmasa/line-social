@@ -2,8 +2,10 @@ module Line
   module Social
     module Request
       class Oauth
-        def initialize(client)
-          @client = client
+        API_URI = URI.parse("https://api.line.me/oauth2/v2.1")
+
+        def initialize(access_token)
+          @access_token = access_token
         end
 
         def issue
@@ -11,7 +13,7 @@ module Line
         end
 
         def verify
-          response = @client.request.get("#{@client.request_path}/verify", access_token: @client.access_token)
+          response = request.get("#{API_URI.path}/verify", access_token: @access_token)
 
           if response.body["error"]
             raise Line::Social::Error.new(response.body["error_description"])
@@ -26,6 +28,13 @@ module Line
 
         def revoke
           raise Line::Social::NotImplementedError
+        end
+
+        def request
+          @request ||= Faraday.new(url: "#{API_URI.scheme}://#{API_URI.host}") do |connection|
+            connection.response :json, content_type: /\bjson$/
+            connection.adapter Faraday.default_adapter
+          end
         end
       end
     end
