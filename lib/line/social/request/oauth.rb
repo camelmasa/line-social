@@ -1,9 +1,11 @@
 module Line
   module Social
     module Request
-      class Oauth
-        def initialize(client)
-          @client = client
+      class Oauth < Base
+        API_URI = URI.parse("https://api.line.me/oauth2/v2.1")
+
+        def initialize(access_token)
+          @access_token = access_token
         end
 
         def issue
@@ -11,7 +13,7 @@ module Line
         end
 
         def verify
-          response = @client.request.get("#{@client.request_path}/verify", access_token: @client.access_token)
+          response = request.get("#{API_URI.path}/verify", access_token: @access_token)
 
           if response.body["error"]
             raise Line::Social::Error.new(response.body["error_description"])
@@ -26,6 +28,12 @@ module Line
 
         def revoke
           raise Line::Social::NotImplementedError
+        end
+
+        private
+
+        def url
+          "#{API_URI.scheme}://#{API_URI.host}"
         end
       end
     end

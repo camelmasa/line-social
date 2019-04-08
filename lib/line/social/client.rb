@@ -10,22 +10,11 @@ module Line
       end
 
       def oauth
-        Request::Oauth.new(self)
+        Request::Oauth.new(@access_token)
       end
 
       def profile
-        Request::Profile.new(self)
-      end
-
-      def request_path
-        Client::API_URI.path
-      end
-
-      def request
-        @request ||= Faraday.new(url: "#{API_URI.scheme}://#{API_URI.host}") do |connection|
-          connection.response :json, content_type: /\bjson$/
-          connection.adapter Faraday.default_adapter
-        end
+        Request::Profile.new(@access_token)
       end
     end
   end

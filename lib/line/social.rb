@@ -4,6 +4,7 @@ require "virtus"
 
 require "line/social/version"
 require "line/social/client"
+require "line/social/request/base"
 require "line/social/request/oauth"
 require "line/social/request/profile"
 require "line/social/request/friendship"
