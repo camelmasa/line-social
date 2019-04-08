@@ -1,7 +1,7 @@
 module Line
   module Social
     module Request
-      class Oauth
+      class Oauth < Base
         API_URI = URI.parse("https://api.line.me/oauth2/v2.1")
 
         def initialize(access_token)
@@ -30,11 +30,10 @@ module Line
           raise Line::Social::NotImplementedError
         end
 
-        def request
-          @request ||= Faraday.new(url: "#{API_URI.scheme}://#{API_URI.host}") do |connection|
-            connection.response :json, content_type: /\bjson$/
-            connection.adapter Faraday.default_adapter
-          end
+        private
+
+        def url
+          "#{API_URI.scheme}://#{API_URI.host}"
         end
       end
     end

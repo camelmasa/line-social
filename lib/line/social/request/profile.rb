@@ -1,7 +1,7 @@
 module Line
   module Social
     module Request
-      class Profile
+      class Profile < Base
         API_URI = URI.parse("https://api.line.me/v2")
 
         def initialize(access_token)
@@ -21,11 +21,10 @@ module Line
           end
         end
 
-        def request
-          @request ||= Faraday.new(url: "#{API_URI.scheme}://#{API_URI.host}") do |connection|
-            connection.response :json, content_type: /\bjson$/
-            connection.adapter Faraday.default_adapter
-          end
+        private
+
+        def url
+          "#{API_URI.scheme}://#{API_URI.host}"
         end
       end
     end
