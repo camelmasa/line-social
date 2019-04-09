@@ -13,7 +13,7 @@ module Line
         end
 
         def verify
-          response = request.get("#{API_URI.path}/verify", access_token: @access_token)
+          response = request.get("#{API_URI}/verify", access_token: @access_token)
 
           if response.body["error"]
             raise Line::Social::Error.new(response.body["error_description"])
@@ -28,12 +28,6 @@ module Line
 
         def revoke
           raise Line::Social::NotImplementedError
-        end
-
-        private
-
-        def url
-          "#{API_URI.scheme}://#{API_URI.host}"
         end
       end
     end
