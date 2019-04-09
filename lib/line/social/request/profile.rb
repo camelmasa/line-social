@@ -10,7 +10,7 @@ module Line
 
         def get
           response = request.get do |request|
-            request.url "#{API_URI.path}/profile"
+            request.url "#{API_URI}/profile"
             request.headers["Authorization"] =  "Bearer #{@access_token}"
           end
 
@@ -19,12 +19,6 @@ module Line
           else
             Line::Social::Profile.new(response.body)
           end
-        end
-
-        private
-
-        def url
-          "#{API_URI.scheme}://#{API_URI.host}"
         end
       end
     end
