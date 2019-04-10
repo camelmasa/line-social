@@ -4,14 +4,10 @@ module Line
       class Profile < Base
         API_URI = URI.parse("https://api.line.me/v2")
 
-        def initialize(access_token)
-          @access_token = access_token
-        end
-
-        def get
+        def get(access_token)
           response = http_client.get do |request|
             request.url "#{API_URI}/profile"
-            request.headers["Authorization"] =  "Bearer #{@access_token}"
+            request.headers["Authorization"] =  "Bearer #{access_token}"
           end
 
           if response.body["error"]
