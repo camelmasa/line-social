@@ -14,6 +14,17 @@ shared_context "stub line api for verifying access token" do
   end
 end
 
+shared_context "stub line api error for verifying access token" do
+  before do
+    body = {
+      "error" => "invalid_request",
+      "error_description" => "access token expired"
+    }
+
+    stub_request(:get, /\Ahttps:\/\/api.line.me\/oauth2\/v2.1\/verify/).to_return(body: body)
+  end
+end
+
 shared_context "stub line api for profile" do
   before do
     body = {
@@ -27,17 +38,6 @@ shared_context "stub line api for profile" do
   end
 end
 
-shared_context "stub line api error for verifying access token" do
-  before do
-    body = {
-      "error" => "invalid_request",
-      "error_description" => "access token expired"
-    }
-
-    stub_request(:get, /\Ahttps:\/\/api.line.me\/oauth2\/v2.1\/verify/).to_return(body: body)
-  end
-end
-
 shared_context "stub line api error for profile" do
   before do
     body = {
@@ -46,6 +46,27 @@ shared_context "stub line api error for profile" do
     }
 
     stub_request(:get, /\Ahttps:\/\/api.line.me\/v2\/profile/).to_return(body: body)
+  end
+end
+
+shared_context "stub line api for friendship" do
+  before do
+    body = {
+      "friendFlag" => true,
+    }
+
+    stub_request(:get, /\Ahttps:\/\/api.line.me\/friendship\/v1\/status/).to_return(body: body)
+  end
+end
+
+shared_context "stub line api error for friendship" do
+  before do
+    body = {
+      "error" => "invalid_request",
+      "error_description" => "access token expired"
+    }
+
+    stub_request(:get, /\Ahttps:\/\/api.line.me\/friendship\/v1\/status/).to_return(body: body)
   end
 end
 

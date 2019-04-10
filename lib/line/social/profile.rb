@@ -5,8 +5,8 @@ module Line
 
       attribute :userId, String
       attribute :displayName, String
-      attribute :pictureUrl
-      attribute :statusMessage
+      attribute :pictureUrl, String, required: false
+      attribute :statusMessage, String, required: false
     end
   end
 end

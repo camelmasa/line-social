@@ -9,16 +9,16 @@ module Line
         end
 
         def get
-          response = request.get do |request|
+          response = http_client.get do |request|
             request.url "#{API_URI}/profile"
             request.headers["Authorization"] =  "Bearer #{@access_token}"
           end
 
           if response.body["error"]
             raise Line::Social::Error.new(response.body["error_description"])
-          else
-            Line::Social::Profile.new(response.body)
           end
+
+          Line::Social::Profile.new(response.body)
         end
       end
     end

@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    line-social (0.1.1)
+    line-social (0.1.2)
       faraday (~> 0.15)
       faraday_middleware (~> 0.13)
       virtus (~> 1.0)
