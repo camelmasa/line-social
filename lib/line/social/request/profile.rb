@@ -16,9 +16,9 @@ module Line
 
           if response.body["error"]
             raise Line::Social::Error.new(response.body["error_description"])
-          else
-            Line::Social::Profile.new(response.body)
           end
+
+          Line::Social::Profile.new(response.body)
         end
       end
     end

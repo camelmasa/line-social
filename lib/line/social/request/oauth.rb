@@ -17,9 +17,9 @@ module Line
 
           if response.body["error"]
             raise Line::Social::Error.new(response.body["error_description"])
-          else
-            Line::Social::Oauth.new(response.body)
           end
+
+          Line::Social::Oauth.new(response.body)
         end
 
         def refresh
