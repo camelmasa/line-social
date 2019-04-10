@@ -2,7 +2,7 @@ module Line
   module Social
     module Request
       class Base
-        def request
+        def http_client
           Faraday.new do |connection|
             connection.response :json, content_type: /\bjson$/
             connection.adapter Faraday.default_adapter

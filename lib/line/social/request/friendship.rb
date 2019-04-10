@@ -9,7 +9,7 @@ module Line
         end
 
         def get
-          response = request.get do |request|
+          response = http_client.get do |request|
             request.url "#{API_URI}/status"
             request.headers["Authorization"] =  "Bearer #{@access_token}"
           end
