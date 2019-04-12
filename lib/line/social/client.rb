@@ -5,8 +5,8 @@ module Line
         Request::Friendship.new
       end
 
-      def oauth
-        Request::Oauth.new
+      def oauth(client_id:, client_secret:)
+        Request::Oauth.new(client_id: client_id, client_secret: client_secret)
       end
 
       def profile
