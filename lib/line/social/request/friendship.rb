@@ -14,6 +14,11 @@ module Line
             raise Line::Social::Error.new(response.body["error_description"])
           end
 
+          # Case of "{"message"=>"There is no login bot linked to this channel."}"
+          if response.body["message"]
+            raise Line::Social::Error.new(response.body["message"])
+          end
+
           Line::Social::Friendship.new(response.body)
         end
       end
