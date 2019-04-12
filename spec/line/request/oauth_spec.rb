@@ -66,15 +66,45 @@ RSpec.describe Line::Social::Request::Oauth do
   end
 
   describe "#refresh" do
-    it "raises Line::Social::NotImplementedError exception" do
-      client = Line::Social::Request::Oauth.new
+    describe "when arguments are invalid" do
+      include_context "stub line api error for refreshing access token"
 
-      expect { client.refresh }.to raise_error(Line::Social::NotImplementedError)
+      it "raises Line::Social::Error exception" do
+        client = Line::Social::Request::Oauth.new
+
+        expect {
+          client.refresh(
+            client_id: "client_id",
+            client_secret: "client_secret",
+            refresh_token: "refresh_token",
+          )
+        }.to raise_error(Line::Social::Error)
+      end
+    end
+
+    describe "when arguments are valid" do
+      include_context "stub line api for refreshing access token"
+
+      it "creates an access token" do
+        client = Line::Social::Request::Oauth.new
+
+        response =  client.refresh(
+          client_id: "client_id",
+          client_secret: "client_secret",
+          refresh_token: "refresh_token",
+        )
+
+        expect(response["access_token"]).to eq "bNl4YEFPI/hjFWhTqexp4MuEw5YPs"
+        expect(response["expires_in"]).to eq 2592000
+        expect(response["refresh_token"]).to eq "Aa1FdeggRhTnPNNpxr8p"
+        expect(response["scope"]).to eq "profile"
+        expect(response["token_type"]).to eq "Bearer"
+      end
     end
   end
 
   describe "#revoke" do
-    it "raises Line::Social::NotImplementedError exception" do
+    pending "raises Line::Social::NotImplementedError exception" do
       client = Line::Social::Request::Oauth.new
 
       expect { client.revoke }.to raise_error(Line::Social::NotImplementedError)

@@ -34,12 +34,37 @@ module Line
           Line::Social::Oauth.new(response.body)
         end
 
-        def refresh
-          raise Line::Social::NotImplementedError
+        def refresh(client_id:, client_secret:, refresh_token:)
+          response = http_client.post do |request|
+            request.url "#{API_URI}/token"
+            request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            request.body = {
+              client_id: client_id,
+              client_secret: client_secret,
+              grant_type: "refresh_token",
+              refresh_token: refresh_token,
+            }
+          end
+
+          if response.body["error"]
+            raise Line::Social::Error.new(response.body["error_description"])
+          end
+
+          Line::Social::Oauth.new(response.body)
         end
 
-        def revoke
-          raise Line::Social::NotImplementedError
+        def revoke(access_token:, client_id:, client_secret:)
+          response = http_client.post do |request|
+            request.url "#{API_URI}/revoke"
+            request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            request.body = {
+              access_token: access_token,
+              client_id: client_id,
+              client_secret: client_secret
+            }
+          end
+
+          response.body["status"] == 200
         end
       end
     end
