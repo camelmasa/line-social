@@ -13,7 +13,7 @@ RSpec.describe Line::Social::Request::Profile do
     describe "when access token is valid" do
       include_context "stub line api for profile"
 
-      it "raises Line::Social::Error exception" do
+      it "returns a profile" do
         client = Line::Social::Request::Profile.new
         response = client.get("access_token")
 

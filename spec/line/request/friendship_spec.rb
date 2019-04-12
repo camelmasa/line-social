@@ -13,7 +13,7 @@ RSpec.describe Line::Social::Request::Friendship do
     describe "when access token is valid" do
       include_context "stub line api for friendship"
 
-      it "raises Line::Social::Error exception" do
+      it "returns a friendship" do
         client = Line::Social::Request::Friendship.new
         response = client.get("access_token")
 

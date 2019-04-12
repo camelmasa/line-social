@@ -17,7 +17,7 @@ RSpec.describe Line::Social::Request::Oauth do
       end
     end
 
-    describe "when access token is valid" do
+    describe "when arguments are valid" do
       include_context "stub line api for creating access token"
 
       it "creates an access token" do
@@ -54,7 +54,7 @@ RSpec.describe Line::Social::Request::Oauth do
     describe "when access token is valid" do
       include_context "stub line api for verifying access token"
 
-      it "raises Line::Social::Error exception" do
+      it "returns a access token" do
         client = Line::Social::Request::Oauth.new
         response = client.verify("access_token")
 
