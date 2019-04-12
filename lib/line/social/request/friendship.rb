@@ -4,14 +4,10 @@ module Line
       class Friendship < Base
         API_URI = URI.parse("https://api.line.me/friendship/v1")
 
-        def initialize(access_token)
-          @access_token = access_token
-        end
-
-        def get
+        def get(access_token)
           response = http_client.get do |request|
             request.url "#{API_URI}/status"
-            request.headers["Authorization"] =  "Bearer #{@access_token}"
+            request.headers["Authorization"] =  "Bearer #{access_token}"
           end
 
           if response.body["error"]

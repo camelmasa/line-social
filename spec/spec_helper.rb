@@ -2,6 +2,32 @@ require "bundler/setup"
 require "line/social"
 require "webmock/rspec"
 
+shared_context "stub line api for creating access token" do
+  before do
+    body = {
+      "access_token" => "bNl4YEFPI/hjFWhTqexp4MuEw5YPs",
+      "expires_in" => 2592000,
+      "id_token" => "eyJhbGciOiJIUzI1NiJ9",
+      "refresh_token" => "Aa1FdeggRhTnPNNpxr8p",
+      "scope" => "profile",
+      "token_type" => "Bearer"
+    }
+
+    stub_request(:post, /\Ahttps:\/\/api.line.me\/oauth2\/v2.1\/token/).to_return(body: body)
+  end
+end
+
+shared_context "stub line api error for creating access token" do
+  before do
+    body = {
+      "error" => "invalid_request",
+      "error_description" => "access token expired"
+    }
+
+    stub_request(:post, /\Ahttps:\/\/api.line.me\/oauth2\/v2.1\/token/).to_return(body: body)
+  end
+end
+
 shared_context "stub line api for verifying access token" do
   before do
     body = {

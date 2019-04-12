@@ -4,18 +4,18 @@ RSpec.describe Line::Social::Request::Profile do
       include_context "stub line api error for profile"
 
       it "raises Line::Social::Error exception" do
-        client = Line::Social::Request::Profile.new("access_token")
+        client = Line::Social::Request::Profile.new
 
-        expect { client.get }.to raise_error(Line::Social::Error)
+        expect { client.get("access_token") }.to raise_error(Line::Social::Error)
       end
     end
 
     describe "when access token is valid" do
       include_context "stub line api for profile"
 
-      it "raises Line::Social::Error exception" do
-        client = Line::Social::Request::Profile.new("access_token")
-        response = client.get
+      it "returns a profile" do
+        client = Line::Social::Request::Profile.new
+        response = client.get("access_token")
 
         expect(response["userId"]).to eq "U4af4980629"
         expect(response["displayName"]).to eq "Brown"
