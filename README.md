@@ -1,8 +1,10 @@
 # Line::Social
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/line/social`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Build Status](https://travis-ci.org/camelmasa/line-social.png)](https://travis-ci.org/camelmasa/line-social)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c74659829afe420dd9e0/maintainability)](https://codeclimate.com/github/camelmasa/line-social/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c74659829afe420dd9e0/test_coverage)](https://codeclimate.com/github/camelmasa/line-social/test_coverage)
 
-TODO: Delete this and the text above, and describe your gem
+Ruby client for [LINE social API](https://developers.line.biz/en/reference/social-api/).
 
 ## Installation
 
@@ -22,7 +24,38 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "line/social"
+client = Line::Social::Client.new
+
+
+# Oauth
+
+## issue
+oauth_client = client.oauth(client_id: "YOUR_CLIENT_ID", client_secret: "YOUR_CLIENT_SECRET")
+oauth = oauth_client.issue(code: "YOUR_CODE", redirect_uri: "YOUR_REDIRECT_URI")
+
+## verify
+oauth_client.verify(oauth.access_token) # or oauth.verify!
+
+## refresh
+oauth_client.refresh(oauth.refresh_token) # or oauth.refresh!
+
+## revoke
+oauth_client.revoke(oauth.access_token) # or oauth.revoke!
+
+
+# Friendship
+
+## get
+client.friendship.get(oauth.access_token)
+
+
+# Profile
+
+## get
+client.profile.get(oauth.access_token)
+```
 
 ## Development
 
