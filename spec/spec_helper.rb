@@ -121,6 +121,12 @@ shared_context "stub line api error for friendship" do
   end
 end
 
+shared_context "stub line api for revoking access token" do
+  before do
+    stub_request(:post, /\Ahttps:\/\/api.line.me\/oauth2\/v2.1\/revoke/)
+  end
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"

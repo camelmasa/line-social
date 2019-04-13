@@ -72,7 +72,7 @@ RSpec.describe Line::Social::Request::Oauth do
       it "creates an access token" do
         client = Line::Social::Request::Oauth.new(client_id: "client_id", client_secret: "client_secret")
 
-        response =  client.refresh(refresh_token: "refresh_token")
+        response = client.refresh(refresh_token: "refresh_token")
 
         expect(response["access_token"]).to eq "bNl4YEFPI/hjFWhTqexp4MuEw5YPs"
         expect(response["expires_in"]).to eq 2592000
@@ -84,10 +84,14 @@ RSpec.describe Line::Social::Request::Oauth do
   end
 
   describe "#revoke" do
-    pending "raises Line::Social::NotImplementedError exception" do
+    include_context "stub line api for revoking access token"
+
+    it "revokes an access token" do
       client = Line::Social::Request::Oauth.new(client_id: "client_id", client_secret: "client_secret")
 
-      expect { client.revoke }.to raise_error(Line::Social::NotImplementedError)
+      response = client.revoke("access_token")
+
+      expect(response).to eq true
     end
   end
 end
