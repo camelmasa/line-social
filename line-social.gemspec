@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["camelmasa"]
   spec.email         = ["camelmasa@gmail.com"]
 
-  spec.summary       = %q{Ruby client for LINE social API}
-  spec.description   = %q{Ruby client for LINE social API}
+  spec.summary       = %q{Ruby client for LINE Social API}
+  spec.description   = %q{Ruby client for LINE Social API}
   spec.homepage      = "https://github.com/camelmasa/line-social"
   spec.license       = "MIT"
 

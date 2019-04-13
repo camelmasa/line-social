@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c74659829afe420dd9e0/maintainability)](https://codeclimate.com/github/camelmasa/line-social/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c74659829afe420dd9e0/test_coverage)](https://codeclimate.com/github/camelmasa/line-social/test_coverage)
 
-Ruby client for [LINE social API](https://developers.line.biz/en/reference/social-api/).
+Ruby client for [LINE Social API](https://developers.line.biz/en/reference/social-api/).
 
 ## Installation
 
