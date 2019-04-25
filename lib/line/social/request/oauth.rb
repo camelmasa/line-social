@@ -10,7 +10,7 @@ module Line
         end
 
         def issue(code:, redirect_uri:)
-          response = http_client.post do |request|
+          response = http_client(:post) do |request|
             request.url "#{API_URI}/token"
             request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
             request.body = URI.encode_www_form(
@@ -22,25 +22,20 @@ module Line
             )
           end
 
-          if response.body["error"]
-            raise Line::Social::Error.new(response.body["error_description"])
-          end
-
           Line::Social::Oauth.new(response.body.merge(client_id: @client_id, client_secret: @client_secret))
         end
 
         def verify(access_token)
-          response = http_client.get("#{API_URI}/verify", access_token: access_token)
-
-          if response.body["error"]
-            raise Line::Social::Error.new(response.body["error_description"])
+          response = http_client(:get) do |request|
+            request.url "#{API_URI}/verify"
+            request.params["access_token"] = access_token
           end
 
           Line::Social::Oauth.new(response.body.merge(client_id: @client_id, client_secret: @client_secret))
         end
 
         def refresh(refresh_token)
-          response = http_client.post do |request|
+          response = http_client(:post) do |request|
             request.url "#{API_URI}/token"
             request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
             request.body = URI.encode_www_form(
@@ -51,15 +46,11 @@ module Line
             )
           end
 
-          if response.body["error"]
-            raise Line::Social::Error.new(response.body["error_description"])
-          end
-
           Line::Social::Oauth.new(response.body.merge(client_id: @client_id, client_secret: @client_secret))
         end
 
         def revoke(access_token)
-          response = http_client.post do |request|
+          response = http_client(:post) do |request|
             request.url "#{API_URI}/revoke"
             request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
             request.body = URI.encode_www_form(
