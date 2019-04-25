@@ -3,15 +3,16 @@ module Line
     module Request
       class Base
         def http_client(method, &block)
-          client = Faraday.new do |connection|
-            connection.response :json, content_type: /\bjson$/
-            connection.response :raise_error
-            connection.adapter Faraday.default_adapter
-          end
+          client =
+            Faraday.new do |connection|
+              connection.response :json, content_type: /\bjson$/
+              connection.response :raise_error
+              connection.adapter Faraday.default_adapter
+            end
 
           client.run_request(method, nil, nil, nil, &block)
         rescue Faraday::Error::ClientError => e
-          error_message = JSON.parse(e.response[:body])["message"]
+          error_message = JSON.parse(e.response[:body])['message']
 
           case e.response[:status]
           when 400
