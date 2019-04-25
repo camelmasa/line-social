@@ -15,11 +15,7 @@ RSpec.describe Line::Social::Request::Base do
       error = Faraday::Error::ClientError.new(nil, response)
       allow_any_instance_of(Faraday::Connection).to receive(:run_request).and_raise(error)
 
-      expect do
-        Line::Social::Request::Base.new.http_client(:post) do |connection|
-          connection.url "https://api.line.me/oauth2/v2.1/token"
-        end
-      end.to raise_error(Line::Social::BadRequestError)
+      expect { Line::Social::Request::Base.new.http_client(:post) }.to raise_error(Line::Social::BadRequestError)
     end
 
     it "raises Line::Social::UnauthorizedError" do
@@ -27,11 +23,7 @@ RSpec.describe Line::Social::Request::Base do
       error = Faraday::Error::ClientError.new(nil, response)
       allow_any_instance_of(Faraday::Connection).to receive(:run_request).and_raise(error)
 
-      expect do
-        Line::Social::Request::Base.new.http_client(:post) do |connection|
-          connection.url "https://api.line.me/oauth2/v2.1/token"
-        end
-      end.to raise_error(Line::Social::UnauthorizedError)
+      expect { Line::Social::Request::Base.new.http_client(:post) }.to raise_error(Line::Social::UnauthorizedError)
     end
 
     it "raises Line::Social::ForbiddenError" do
@@ -39,11 +31,7 @@ RSpec.describe Line::Social::Request::Base do
       error = Faraday::Error::ClientError.new(nil, response)
       allow_any_instance_of(Faraday::Connection).to receive(:run_request).and_raise(error)
 
-      expect do
-        Line::Social::Request::Base.new.http_client(:post) do |connection|
-          connection.url "https://api.line.me/oauth2/v2.1/token"
-        end
-      end.to raise_error(Line::Social::ForbiddenError)
+      expect { Line::Social::Request::Base.new.http_client(:post) }.to raise_error(Line::Social::ForbiddenError)
     end
 
     it "raises Line::Social::TooManyRequestsError" do
@@ -51,11 +39,7 @@ RSpec.describe Line::Social::Request::Base do
       error = Faraday::Error::ClientError.new(nil, response)
       allow_any_instance_of(Faraday::Connection).to receive(:run_request).and_raise(error)
 
-      expect do
-        Line::Social::Request::Base.new.http_client(:post) do |connection|
-          connection.url "https://api.line.me/oauth2/v2.1/token"
-        end
-      end.to raise_error(Line::Social::TooManyRequestsError)
+      expect { Line::Social::Request::Base.new.http_client(:post) }.to raise_error(Line::Social::TooManyRequestsError)
     end
 
     it "raises Line::Social::InternalServerError" do
@@ -63,11 +47,7 @@ RSpec.describe Line::Social::Request::Base do
       error = Faraday::Error::ClientError.new(nil, response)
       allow_any_instance_of(Faraday::Connection).to receive(:run_request).and_raise(error)
 
-      expect do
-        Line::Social::Request::Base.new.http_client(:post) do |connection|
-          connection.url "https://api.line.me/oauth2/v2.1/token"
-        end
-      end.to raise_error(Line::Social::InternalServerError)
+      expect { Line::Social::Request::Base.new.http_client(:post) }.to raise_error(Line::Social::InternalServerError)
     end
   end
 end
