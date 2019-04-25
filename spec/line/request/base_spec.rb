@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Line::Social::Request::Base do
   describe '#http_client' do
     it 'returns a Faraday::Response' do

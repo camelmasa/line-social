@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Line::Social::Request::Oauth do
   describe '#issue' do
     include_context 'stub line api for creating access token'

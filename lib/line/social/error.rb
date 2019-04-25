@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Line
   module Social
     class Error < StandardError; end

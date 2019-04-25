@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 gem "webmock", git: "https://github.com/camelmasa/webmock.git", branch: "allow-hash"

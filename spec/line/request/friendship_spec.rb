@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Line::Social::Request::Friendship do
   describe '#get' do
     include_context 'stub line api for friendship'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Line::Social::Request::Profile do
   describe '#get' do
     include_context 'stub line api for profile'

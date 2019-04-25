@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_context 'stub line api for creating access token' do
   before do
     body = {
