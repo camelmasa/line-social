@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 module Line
   module Social
     class Oauth
       include Virtus.model(strict: true)
 
-      attribute :access_token,  String, required: false
-      attribute :client_id,     String
+      attribute :access_token, String, required: false
+      attribute :client_id, String
       attribute :client_secret, String
-      attribute :expires_in,    Integer
-      attribute :id_token,      String, required: false
+      attribute :expires_in, Integer
+      attribute :id_token, String, required: false
       attribute :refresh_token, String, required: false
-      attribute :scope,         String
-      attribute :token_type,    String, required: false
+      attribute :scope, String
+      attribute :token_type, String, required: false
 
       def verify!
         oauth = client.verify(access_token)
